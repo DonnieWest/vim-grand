@@ -16,8 +16,10 @@ class PathResolver
 
     def getDynamicPaths()
         result = []
-        result << getAndroidSdkJar()
-        result << getAndroidSdkSourcePath()
+        if ProjectControler.isAndroidProject
+          result << getAndroidSdkJar()
+          result << getAndroidSdkSourcePath()
+        end
         result += getExplodedAarClasses()
         return result
     end
@@ -36,8 +38,11 @@ class PathResolver
     # This method should be removed or moved to TagsFile
     def getAllSourcePaths()
         sourcePaths = []
+        
         sourcePaths += getProjectSourcePaths()
-        sourcePaths.push(getAndroidSdkSourcePath())
+        if ProjectControler.isAndroidProject
+          sourcePaths.push(getAndroidSdkSourcePath())
+        end 
         return sourcePaths
     end
 

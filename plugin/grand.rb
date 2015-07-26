@@ -57,7 +57,7 @@ class Grand
         # - Call from here
         # - puts message if not set
 
-        if ProjectControler.isGradleProject() and ProjectControler.isAndroidProject()
+        if ProjectControler.isGradleProject()
             configurator = Configurator.new()
             configurator.updatePathFile()
 
@@ -95,7 +95,9 @@ class Grand
     def self.addAllCommands(proxy = VimProxy.new)
         @vimProxy = proxy
         setupCommand("GrandTags")
-        setupCommand("GrandInstall")
+        if ProjectControler.isAndroidProject 
+          setupCommand("GrandInstall")
+        end
         setupCommandAcceptingArguments("GrandTest")
     end
 
