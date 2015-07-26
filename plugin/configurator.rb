@@ -21,7 +21,7 @@ class Configurator
 
         # Currently only the class paths are set. This seems to have no
         # downsides in completion. Otherwise make directories to Sourcepaths
-        callJavacompleteMethodWithPaths('SetClassPath', paths)
+        callJavacompleteMethodWithPaths('JavaComplete_LibsPath', paths)
     end
 
     def setupSyntastic()
@@ -44,7 +44,7 @@ class Configurator
     private
     def callJavacompleteMethodWithPaths(methodName, pathsArray)
         joinedPaths = pathsArray.join(':')
-        @vimProxy.callVimMethod("javacomplete#" + methodName, joinedPaths )
+        @vimProxy.setGlobalVariableToValue(methodName, joinedPaths )
     end
 
     def self.javacompleteWasSetUp?; @@javacompleteWasSetUp; end
